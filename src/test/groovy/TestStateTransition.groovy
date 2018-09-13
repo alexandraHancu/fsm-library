@@ -34,7 +34,7 @@ class TestStateTransition extends Specification{
         StateTransitionTuple<Object, Object> touple = new StateTransitionTuple<>(state, transition)
 
         then: 'not null object'
-        touple!=null;
+        touple!=null
     }
 
     def 'should return valid state and transition after init'(){

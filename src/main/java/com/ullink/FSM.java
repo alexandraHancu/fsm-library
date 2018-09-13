@@ -14,7 +14,7 @@ package com.ullink;
 
 public interface FSM<T, K>
 {
-    void addState(State<T> current, Transition<K>input , State<T> next);
+    void addTransition(State<T> current, Transition<K>input , State<T> next);
 
     /**
      * method that returns next state WITHOUT performing any action or causing any side-effects
@@ -25,14 +25,18 @@ public interface FSM<T, K>
     State<T> getNextState(State<T> current, Transition<K>input);
 
     /**
-     * Use this method to get the next state AND perform
+     * Use this method to perform states's side effects
      * @param currentState
-     * @param stateActionParam object to be used when performing the specified side effect on NEXT state
+     * @param stateActionParam object to be used when performing the specified side effect on state
+     */
+    void doSideEffects(State<T> currentState, T stateActionParam);
+
+    /**
+     * Use this method to perform transition's side effects
      * @param input transition
      * @param transitionActionParam object to be used when performing the specified side effect on transition
-     * @return next state specified by the current state and transition
      */
-    State<T> react(State<T> currentState, T stateActionParam, Transition<K> input, K transitionActionParam);
+    void doSideEffects(Transition<K> input, K transitionActionParam);
 
     /**
      * use this method to check if a state belongs to the fsm
@@ -41,7 +45,5 @@ public interface FSM<T, K>
      */
     boolean isValidState(State<T> s);
 
-
-    State<T> getInitialState();
-    State<T> getFinalState();
+    State<T> getErrorState();
 }

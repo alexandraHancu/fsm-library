@@ -61,4 +61,10 @@ public class Unit<T>
 
         return Objects.hash(name, consumer);
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }
